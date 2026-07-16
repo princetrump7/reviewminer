@@ -36,7 +36,10 @@ export default function ScanResults() {
       return;
     }
 
+    if (!supabase) return;
+
     async function load() {
+      if (!supabase || !session) return;
       const scanId = params.id as string;
 
       // Get scan
@@ -128,7 +131,7 @@ export default function ScanResults() {
         className="mb-4"
         onClick={() => router.push("/dashboard")}
       >
-        <ArrowLeft className="mr-2 h-4 w-4" />
+        <ArrowLeft aria-hidden="true" className="mr-2 h-4 w-4" />
         Back to Dashboard
       </Button>
 
@@ -144,7 +147,7 @@ export default function ScanResults() {
                 rel="noopener noreferrer"
                 className="text-sm font-normal text-primary hover:underline"
               >
-                <ExternalLink className="inline h-3 w-3" />
+                <ExternalLink aria-hidden="true" className="inline h-3 w-3" />
                 {" Amazon"}
               </a>
             )}

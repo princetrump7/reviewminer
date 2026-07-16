@@ -4,19 +4,26 @@ import { createBrowserClient } from "@supabase/ssr";
 import { createContext, useContext, useEffect, useState } from "react";
 import type { Session, SupabaseClient } from "@supabase/supabase-js";
 
-function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+function createClient(): SupabaseClient | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key || url === "your_supabase_url") return null;
+  try {
+    return createBrowserClient(url, key);
+  } catch {
+    return null;
+  }
 }
 
 type SupabaseContext = {
-  supabase: SupabaseClient;
+  supabase: SupabaseClient | null;
   session: Session | null;
 };
 
-const Context = createContext<SupabaseContext | undefined>(undefined);
+const Context = createContext<SupabaseContext>({
+  supabase: null,
+  session: null,
+});
 
 export function SessionContextProvider({
   children,
@@ -27,6 +34,7 @@ export function SessionContextProvider({
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
+    if (!supabase) return;
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
@@ -48,13 +56,5 @@ export function SessionContextProvider({
 }
 
 export function useSupabase() {
-  const context = useContext(Context);
-  if (!context) {
-    throw new Error("useSupabase must be used within SessionContextProvider");
-  }
-  return context;
-}
-
-export function createClientComponentClient() {
-  return createClient();
+  return useContext(Context);
 }

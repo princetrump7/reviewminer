@@ -45,6 +45,7 @@ export default function Pricing() {
 
   async function handleSubscribe() {
     if (!session) {
+      if (!supabase) return;
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
       });
@@ -108,7 +109,7 @@ export default function Pricing() {
             <ul className="mt-6 space-y-3">
               {plan.features.map((feature) => (
                 <li key={feature} className="flex items-start gap-2 text-sm">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                   {feature}
                 </li>
               ))}

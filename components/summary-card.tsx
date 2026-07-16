@@ -53,7 +53,7 @@ export function SummaryCard({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-primary" />
+            <Sparkles aria-hidden="true" className="h-5 w-5 text-primary" />
             AI Summary
           </CardTitle>
         </CardHeader>
@@ -63,7 +63,7 @@ export function SummaryCard({
             praises from these reviews.
           </p>
           <Button onClick={onGenerate} variant="outline" className="w-full">
-            <Sparkles className="mr-2 h-4 w-4" />
+            <Sparkles aria-hidden="true" className="mr-2 h-4 w-4" />
             Generate Summary
           </Button>
         </CardContent>
@@ -75,7 +75,7 @@ export function SummaryCard({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-primary" />
+          <Sparkles aria-hidden="true" className="h-5 w-5 text-primary" />
           AI Summary
         </CardTitle>
       </CardHeader>
@@ -113,7 +113,7 @@ export function SummaryCard({
         {/* Praises */}
         <div>
           <p className="mb-2 flex items-center gap-1.5 text-sm font-medium">
-            <ThumbsUp className="h-4 w-4 text-green-500" />
+            <ThumbsUp aria-hidden="true" className="h-4 w-4 text-green-500" />
             Top Praises
           </p>
           <ul className="space-y-1">
@@ -129,7 +129,7 @@ export function SummaryCard({
         {/* Complaints */}
         <div>
           <p className="mb-2 flex items-center gap-1.5 text-sm font-medium">
-            <ThumbsDown className="h-4 w-4 text-red-500" />
+            <ThumbsDown aria-hidden="true" className="h-4 w-4 text-red-500" />
             Top Complaints
           </p>
           <ul className="space-y-1">
@@ -145,7 +145,7 @@ export function SummaryCard({
         {/* Themes */}
         <div>
           <p className="mb-2 flex items-center gap-1.5 text-sm font-medium">
-            <TrendingUp className="h-4 w-4 text-blue-500" />
+            <TrendingUp aria-hidden="true" className="h-4 w-4 text-blue-500" />
             Key Themes
           </p>
           <div className="flex flex-wrap gap-2">

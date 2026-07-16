@@ -30,12 +30,16 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!session) {
-      // Not authenticated — trigger sign in
-      supabase.auth.signInWithOAuth({ provider: "google" });
+      if (supabase) {
+        supabase.auth.signInWithOAuth({ provider: "google" });
+      }
       return;
     }
 
+    if (!supabase) return;
+
     async function load() {
+      if (!supabase || !session) return;
       // Get profile
       const { data: prof } = await supabase
         .from("profiles")
@@ -60,7 +64,7 @@ export default function Dashboard() {
   }, [session, supabase]);
 
   async function handleSignOut() {
-    await supabase.auth.signOut();
+    if (supabase) await supabase.auth.signOut();
     router.push("/");
   }
 
@@ -86,11 +90,11 @@ export default function Dashboard() {
         </div>
         <div className="flex items-center gap-3">
           <Button onClick={() => router.push("/dashboard/new")}>
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus aria-hidden="true" className="mr-2 h-4 w-4" />
             New Scan
           </Button>
           <Button variant="ghost" size="icon" onClick={handleSignOut}>
-            <LogOut className="h-4 w-4" />
+            <LogOut aria-hidden="true" className="h-4 w-4" />
           </Button>
         </div>
       </div>
@@ -100,7 +104,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Exports Remaining</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+            <BarChart3 aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold">{remaining}</p>
@@ -112,7 +116,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total Scans</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <FileText aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold">{scans.length}</p>
@@ -151,13 +155,13 @@ export default function Dashboard() {
       ) : scans.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center py-12">
-            <FileText className="mb-4 h-12 w-12 text-muted-foreground" />
+            <FileText aria-hidden="true" className="mb-4 h-12 w-12 text-muted-foreground" />
             <p className="mb-2 font-medium">No scans yet</p>
             <p className="mb-4 text-sm text-muted-foreground">
               Paste an Amazon URL to get started
             </p>
             <Button onClick={() => router.push("/dashboard/new")}>
-              <Plus className="mr-2 h-4 w-4" />
+              <Plus aria-hidden="true" className="mr-2 h-4 w-4" />
               First Scan
             </Button>
           </CardContent>

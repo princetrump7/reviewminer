@@ -63,7 +63,7 @@ export function UrlInput() {
   return (
     <form onSubmit={handleSubmit} className="flex w-full gap-2">
       <div className="relative flex-1">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Search aria-hidden="true" className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <input
           type="text"
           placeholder="Paste Amazon product URL (e.g., https://amazon.com/dp/B0XXXXX)"
@@ -76,7 +76,7 @@ export function UrlInput() {
       <Button type="submit" disabled={loading} size="lg">
         {loading ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 aria-hidden="true" className="mr-2 h-4 w-4 animate-spin" />
             Scraping...
           </>
         ) : (

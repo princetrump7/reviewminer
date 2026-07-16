@@ -79,7 +79,7 @@ export function ReviewsTable({ reviews, loading, scanId }: ReviewsTableProps) {
           Showing {reviews.length} reviews
         </p>
         <Button variant="outline" size="sm" onClick={handleExport} disabled={exporting}>
-          <Download className="mr-2 h-4 w-4" />
+          <Download aria-hidden="true" className="mr-2 h-4 w-4" />
           {exporting ? "Exporting..." : "Download CSV"}
         </Button>
       </div>
@@ -95,6 +95,7 @@ export function ReviewsTable({ reviews, loading, scanId }: ReviewsTableProps) {
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
+                        aria-hidden="true"
                         className={`h-3.5 w-3.5 ${
                           i < (review.rating ?? 0)
                             ? "fill-yellow-400 text-yellow-400"
@@ -127,9 +128,9 @@ export function ReviewsTable({ reviews, loading, scanId }: ReviewsTableProps) {
                         className="ml-1 inline-flex items-center text-xs text-primary hover:underline"
                       >
                         {expandedId === review.id ? (
-                          <>Show less <ChevronUp className="ml-0.5 h-3 w-3" /></>
+                          <>Show less <ChevronUp aria-hidden="true" className="ml-0.5 h-3 w-3" /></>
                         ) : (
-                          <>Show more <ChevronDown className="ml-0.5 h-3 w-3" /></>
+                          <>Show more <ChevronDown aria-hidden="true" className="ml-0.5 h-3 w-3" /></>
                         )}
                       </button>
                     </>

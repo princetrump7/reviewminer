@@ -13,6 +13,26 @@ export const metadata: Metadata = {
   title: "ReviewMiner — Extract Amazon Reviews to CSV + AI Summary",
   description:
     "Paste an Amazon product URL and get all reviews extracted to CSV with an AI-powered summary. Free tier available.",
+  metadataBase: new URL("https://reviewminer.app"),
+  openGraph: {
+    title: "ReviewMiner — Extract Amazon Reviews to CSV + AI Summary",
+    description:
+      "Paste an Amazon product URL and get all reviews extracted to CSV with an AI-powered summary. Free tier available.",
+    url: "/",
+    siteName: "ReviewMiner",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ReviewMiner — Extract Amazon Reviews to CSV + AI Summary",
+    description:
+      "Paste an Amazon product URL and get all reviews extracted to CSV with an AI-powered summary. Free tier available.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -45,7 +65,28 @@ export default function RootLayout({
                 </div>
               </div>
             </header>
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              {children}
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "WebApplication",
+                    name: "ReviewMiner",
+                    description:
+                      "AI-powered tool that extracts Amazon product reviews to CSV and generates intelligent summaries. Helps businesses analyze customer feedback at scale.",
+                    applicationCategory: "BusinessApplication",
+                    offers: {
+                      "@type": "Offer",
+                      price: "0",
+                      priceCurrency: "USD",
+                      description: "Free tier available",
+                    },
+                  }),
+                }}
+              />
+            </main>
             <footer className="border-t py-6 text-center text-sm text-muted-foreground">
               <div className="container">
                 ReviewMiner — Extract Amazon reviews to CSV in seconds.
